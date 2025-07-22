@@ -17,7 +17,7 @@ python manage.py runserver
 The migrations may not be necessary once the server has been ran once, but it prevents any headaches.
 
 ### Viewing the Admin Page
-Once the server is up and running, you can check out the admin page at ```localhost:8000/admin```.  This can be used as an additional method to verify that files are being stored in the django database in the destination directory.
+Once the server is up and running, you can check out the admin page at ```localhost:8000/admin``` or ```127.0.0.1:8000/admin```.  This can be used as an additional method to verify that files are being stored in the django database in the destination directory.
 
 Admin details are available upon request.
 
