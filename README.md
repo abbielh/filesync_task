@@ -1,14 +1,13 @@
 ## Usage
 ### Setup
-Clone this repository and stay in the parent -```task```- directory. 
-Set up a virtual environment, here is a quick guide for unix systems:
+Clone this repository and set up a virtual environment, here is a quick guide for unix systems:
 ```
 python -m venv venv
 source venv/activate/bin
 pip install -r requirements.txt
 ```
 ### Running the Server
-Navigate to project directory, ```task/filesync```. Run:
+Navigate to project directory, ```filesync_task/filesync```. Run:
 ```
 python manage.py migrate
 python manage.py makemigrations files
@@ -21,22 +20,22 @@ Once the server is up and running, you can check out the admin page at ```localh
 Admin details are available upon request.
 
 ### Running the Application
-Navigate to the parent directory of the project, ```task```. Run:
+Navigate to the project directory, Run:
 ```
 python sync_app.py
 ```
-This will let you know that it is listening to the source dir-```task/data/files```. When you change anything file related in the source dir, it will output the status accordingly. 
-If not already created, the destination directory will be made in ```task/filesync/data/files```
+This will let you know that it is listening to the source dir-```filesync_task/data/files```. When you change anything file related in the source dir, it will output the status accordingly. 
+If not already created, the destination directory will be made in ```filesync_task/filesync/data/files```
 The server must be running for this application to work
 
 ### Testing the project
 To run tests on the Django backend:
 ```
-cd task/filesync
+cd filesync_task/filesync
 python manage.py test files
 ```
 To run tests on the CLI applcation:
 ```
-cd task
-pytest test_sync_app.py
+cd filesync_task/filesync
+pytest
 ```
