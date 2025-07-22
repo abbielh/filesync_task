@@ -47,5 +47,5 @@ pytest
 Due to personal time contraints, I did not implement the following however they were considered:
 
 - Chunking
-- User account creation and authentication (tokenisation perhaps)
+- User account creation and authentication
 - File versions and rollback functionality
