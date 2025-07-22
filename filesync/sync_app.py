@@ -5,11 +5,11 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
 API_URL = "http://127.0.0.1:8000/api/files/"
-SOURCE_DIR = "/Users/abbieh/Desktop/task/data/files"  # Your source directory
+SOURCE_DIR = "../data/files"  
 
 class SyncHandler(FileSystemEventHandler):
     def __init__(self):
-        self.synced_files = {}  # name -> id
+        self.synced_files = {}  
 
     def initial_sync(self):
         local_files = set(os.listdir(SOURCE_DIR))
