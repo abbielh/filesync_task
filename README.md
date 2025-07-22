@@ -14,6 +14,8 @@ python manage.py makemigrations files
 python manage.py migrate
 python manage.py runserver
 ```
+The migrations may not be necessary once the server has been ran once, but it prevents any headaches.
+
 ### Viewing the Admin Page
 Once the server is up and running, you can check out the admin page at ```localhost:8000/admin```.  This can be used as an additional method to verify that files are being stored in the django database in the destination directory.
 
@@ -39,3 +41,11 @@ To run tests on the CLI applcation:
 cd filesync_task/filesync
 pytest
 ```
+
+## Improvements
+
+Due to personal time contraints, I did not implement the following however they were considered:
+
+- Chunking
+- User account creation and authentication (tokenisation perhaps)
+- File versions and rollback functionality
