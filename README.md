@@ -4,7 +4,7 @@ Clone this repository and set up a virtual environment, here is a quick guide fo
 ```
 python -m venv venv
 source venv/activate/bin
-pip install -r requirements.txt
+pip install -r filesync/requirements.txt
 ```
 ### Running the Server
 Navigate to project directory, ```filesync_task/filesync```. Run:
