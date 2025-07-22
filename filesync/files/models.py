@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+# Stores the file ID, file name and contents and time uploaded/updated. 
+# When a change is detected, updates occur automatically.
 
 class SyncedFile(models.Model):
     name = models.CharField(max_length=255, unique=True)

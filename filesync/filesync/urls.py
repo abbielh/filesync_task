@@ -19,6 +19,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+# Routes requests for the admin site, and API calls use the project's custom views.
+# Defines where files should be saved when they are uploaded to the server
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('files.urls')),

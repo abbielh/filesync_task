@@ -11,25 +11,23 @@ class SyncHandler(FileSystemEventHandler):
     def __init__(self):
         self.synced_files = {}  
 
+    # Syncs changes to files when the app starts- e.g if they have been created/deleted locally,
+    # yet the changes have not been registered on the server yet.
     def initial_sync(self):
         local_files = set(os.listdir(SOURCE_DIR))
         synced_files = set(self.synced_files.keys())
 
-        # Files in source but not synced → upload
         for f in local_files - synced_files:
             path = os.path.join(SOURCE_DIR, f)
             if os.path.isfile(path):
                 print(f"Initial sync upload: {f}")
                 self.upload_file(f, path)
 
-        # Files synced but not in source → delete remotely
         for f in synced_files - local_files:
             print(f"Initial sync delete remote: {f}")
             self.delete_file(f)
 
-        # For files in both, optionally check if changed and update
-        # (left as an exercise, e.g. compare timestamps or hash)
-
+    # Triggered when a file is created, modified, or deleted locally
     def on_created(self, event):
         if event.is_directory:
             return
@@ -51,6 +49,8 @@ class SyncHandler(FileSystemEventHandler):
         print(f"File deleted: {filename}")
         self.delete_file(filename)
 
+    # If the file is new: send POST request to create it (calls create view), and stores its ID in the synced files database.
+    # If the file is not new: sends PUT request to update existing file on the server using its ID.
     def upload_file(self, name, path):
         if not os.path.exists(path):
             return
@@ -74,6 +74,7 @@ class SyncHandler(FileSystemEventHandler):
         except Exception as e:
             print(f"Failed to sync {name}: {e}")
 
+    # Deletes a certain file using the file's ID, removes it from synced files database
     def delete_file(self, name):
         file_id = self.synced_files.get(name)
         if not file_id:
@@ -87,6 +88,7 @@ class SyncHandler(FileSystemEventHandler):
         except Exception as e:
             print(f"Failed to delete {name}: {e}")
 
+# Gets the list of already synced files to prevent reuploading existing files as new
 def preload_synced_files(handler):
     try:
         r = requests.get(API_URL)
@@ -97,6 +99,8 @@ def preload_synced_files(handler):
     except Exception as e:
         print(f"Could not preload files: {e}")
 
+# Server state is retrieved (all files stored listed) and initial sync ran
+# Watch the source directory indefinitely for any changes that should be sent to the server.
 def main():
     event_handler = SyncHandler()
     preload_synced_files(event_handler)

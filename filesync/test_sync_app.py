@@ -3,6 +3,8 @@ import os
 from unittest.mock import patch, MagicMock
 from sync_app import SyncHandler
 
+# Mock tests to ensure that files are being created and deleted
+# Essentially checks the synced_files dictionary for files and their ID's and whether they have been modified correctly.
 def test_upload_new_file():
     handler = SyncHandler()
     with tempfile.TemporaryDirectory() as tmpdir:
